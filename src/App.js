@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import EmployeeList from './components/EmployeeList';
+import AddEmployeeForm from './components/AddEmployeeForm';
+import EditEmployeeForm from './components/EditEmployeeForm';
+import EmployeeDetails from './components/EmployeeDetails';
 
-function App() {
+const App = () => {
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const handleEmployeeSelect = (employee) => {
+    setSelectedEmployee(employee);
+  };
+
+  const handleAddEmployee = (newEmployee) => {
+    // Implement add functionality here
+  };
+
+  const handleUpdateEmployee = (updatedEmployee) => {
+    // Implement update functionality here
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <EmployeeList onSelect={handleEmployeeSelect} />
+      <AddEmployeeForm onAdd={handleAddEmployee} />
+      {selectedEmployee && (
+        <>
+          <EditEmployeeForm employee={selectedEmployee} onUpdate={handleUpdateEmployee} />
+          <EmployeeDetails employee={selectedEmployee} />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
